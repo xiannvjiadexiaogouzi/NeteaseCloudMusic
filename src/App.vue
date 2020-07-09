@@ -1,28 +1,39 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" :style="{paddingBottom: showPlayer ? '1.4rem' : '1rem'}">
+    <router-view />
+    <player v-show="showPlayer" />
+    <bottom-menu />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapState } from "vuex";
+import BottomMenu from "./components/BottomMenu";
+import Player from "./components/Player";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    BottomMenu,
+    Player
+  },
+  computed: {
+    ...mapState("player", ["showPlayer"])
   }
-}
+};
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-size: 0.2rem;
+  // overflow: auto;
+  // padding-bottom: 1.4rem;
+  .bottom-menu {
+    position: fixed;
+    bottom: 0;
+  }
 }
 </style>
